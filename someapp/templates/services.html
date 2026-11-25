@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<h1>Наши услуги</h1>
+
+<ul>
+    {% for service in services %}
+        <li>
+            <b>{{ service.name }}</b><br>
+            {{ service.description }}
+        </li>
+    {% empty %}
+        <li>Услуг пока нет.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

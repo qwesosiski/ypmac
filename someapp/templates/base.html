@@ -1,14 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <main>{% block main_content %}
-        Заявка отправлена
+
+    <nav>
+        <a href="{% url 'someapp:main' %}">Главная</a>
+        <a href="{% url 'someapp:create_request' %}">Новая заявка</a>
+        <a href="{% url 'someapp:my_requests' %}">Мои заявки</a>
+        <a href="{% url 'someapp:services' %}">Услуги</a>
+        {% if user.is_authenticated %}
+            <form action="{% url 'someapp:logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Выйти</button>
+            </form>
+        {% else %}
+            <a href="{% url 'someapp:login' %}">Войти</a>
+        {% endif %}
+    </nav>
+
+    <hr>
+    <hr>
+    <hr>
+
+    <main>
+        {% block main_content %}
         {% endblock main_content %}
     </main>
+
 </body>
 </html>

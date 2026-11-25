@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<h1>Мои заявки</h1>
+
+{% if requests %}
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>Услуга</th>
+            <th>Комментарий</th>
+            <th>Статус</th>
+            <th>Дата</th>
+        </tr>
+        {% for request in requests %}
+        <tr>
+            <td>{{ request.service.name }}</td>
+            <td>{{ request.comment }}</td>
+            <td>{{ request.get_status_display }}</td>
+            <td>{{ request.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>У вас пока нет заявок. <a href="{% url 'someapp:create_request' %}">Создать заявку</a></p>
+{% endif %}
+{% endblock %}

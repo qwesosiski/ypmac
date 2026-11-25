@@ -1,7 +1,6 @@
 from django import forms
 from .models import Request
 
-
 class RequestForm(forms.ModelForm):
     class Meta:
         model = Request
@@ -10,8 +9,8 @@ class RequestForm(forms.ModelForm):
             "comment": forms.Textarea(attrs={"rows": 3}),
         }
 
-    def __init__(self, *args, user=None, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, data=None, user=None):
+        super().__init__(data=data)
         self._user = user
 
     def save(self, commit=True):
@@ -21,3 +20,4 @@ class RequestForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
+
